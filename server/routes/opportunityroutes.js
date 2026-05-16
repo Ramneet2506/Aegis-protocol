@@ -10,11 +10,11 @@ router.post("/", protect, authorizeRoles("faculty", "admin"), async (req, res) =
         const { title, description, deadline } = req.body;
 
         const opportunity = await Opportunity.create({
-            title,
-            description,
-            deadline,
-            postedBy: req.user._id
-        });
+    title,
+    description,
+    deadline,
+    createdBy: req.user._id
+});
 
         res.status(201).json(opportunity);
     } catch (error) {
@@ -50,7 +50,6 @@ router.post("/:id/apply", protect, authorizeRoles("student"), async (req, res) =
 router.get("/", protect, async (req, res) => {
     try {
         const opportunities = await Opportunity.find()
-            .populate("postedBy", "name email")
             .populate("applications.student", "name email");
 
         res.json(opportunities);

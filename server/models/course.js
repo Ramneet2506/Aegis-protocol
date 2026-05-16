@@ -1,14 +1,22 @@
 const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema({
-  title: String,
+  title: {
+    type: String,
+    required: [true, "Please provide a course title"],
+  },
 
-  description: String,
+  description: {
+    type: String,
+    required: [true, "Please provide a course description"],
+  },
 
-  faculty: {
+  createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+
+  
 
   enrolledStudents: [
     {
@@ -34,6 +42,11 @@ const courseSchema = new mongoose.Schema({
       },
     },
   ],
-});
+}, { timestamps: true });
+
+// Indexes for query optimization
+courseSchema.index({ createdBy: 1 });
+courseSchema.index({ enrolledStudents: 1 });
+courseSchema.index({ createdAt: -1 });
 
 module.exports = mongoose.model("Course", courseSchema);

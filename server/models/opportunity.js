@@ -11,6 +11,17 @@ const opportunitySchema = new mongoose.Schema({
     },
     deadline: {
         type: Date,
+        required: true,
+        validate: {
+            validator: function(v) {
+                return v > new Date();
+            },
+            message: "Deadline must be in the future"
+        }
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
     postedBy: {
@@ -31,5 +42,10 @@ const opportunitySchema = new mongoose.Schema({
         }
     ]
 }, { timestamps: true });
+
+// Indexes for query optimization
+opportunitySchema.index({ createdBy: 1 });
+opportunitySchema.index({ deadline: 1 });
+opportunitySchema.index({ createdAt: -1 });
 
 module.exports = mongoose.model("Opportunity", opportunitySchema);
