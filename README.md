@@ -1,170 +1,127 @@
-# AEGIS Protocol – Unified Campus Digital Ecosystem
+# 🛡️ AEGIS Protocol
 
-## Overview
+> A Unified Digital Ecosystem for Campus Life
 
-AEGIS Protocol is a **web-based campus ecosystem platform** designed to unify multiple fragmented campus systems into one integrated application.
-The platform combines **academic resources, grievance management, internship opportunities, announcements, and course collaboration** into a single role-based system.
+AEGIS Protocol is a full-stack MERN-based campus management platform designed to centralize academic systems, grievance handling, opportunities, announcements, and student interaction into a single integrated ecosystem.
 
-The goal of the project is to eliminate the problem of **disconnected campus platforms** by providing a centralized dashboard for **students, faculty, and administrators**.
-
+Built for hackathons, scalability, and real-world campus workflows.
 
 ---
 
-# Features Implemented
+# Features
 
-## 1. Role-Based Authentication
+## Authentication & Authorization
 
-Users log in with different roles, each having specific permissions.
+* JWT-based authentication
+* Role-based access control (RBAC)
+* Roles:
 
-Roles supported:
-
-* **Student**
-* **Faculty**
-* **Authority**
-
-Capabilities:
-
-* Secure login using authentication tokens
-* Role-based access to different modules
+  * Student
+  * Faculty
+  * Authority
+  * Admin
 * Protected backend routes
+* Ownership-based authorization
 
 ---
 
 # Course Management System
 
-The platform includes a **Learning Management System (LMS)-style course module**.
+## Faculty Features
 
-## Faculty Capabilities
-
-Faculty members can:
-
-* Create new courses
-* Add learning resources
-* Post course announcements
+* Create courses
+* Add resources
+* Add course announcements
+* Create assignments
 * View enrolled students
-* Monitor course participation
+* Manage own courses only
 
-## Student Capabilities
+## Student Features
 
-Students can:
-
-* View available courses
 * Enroll in courses
+* View enrolled courses
 * Unenroll from courses
-* Access resources after enrollment
-* View course announcements
-* Track enrolled courses in **My Courses**
+* Access resources only for enrolled courses
+* View assignments
+* Submit assignments
 
 ---
 
-## Course Workflow
+# Assignment Management System
 
-### Courses Page
+* Assignment creation with due date & time
+* PDF/ZIP submission support
+* Late submission detection
+* Assignment tracking
+* Submission management
+* Automatic due reminders
 
-Students see:
-
-Course Name + Enroll button
-
-Once enrolled:
-
-* Course disappears from **Courses**
-* Course appears in **My Courses**
-
----
-
-### My Courses
-
-Shows all courses the student is enrolled in.
-
-Students can:
-
-* Click the course name to open the **Course Details Page**
-* Unenroll from the course
----
-
-### Course Details Page
-
-Displays full information about the course in a structured layout.
-
-Sections include:
-
-* Course title
-* Course description
-* Resources
-* Course announcements
-* Enrolled students (faculty view)
-
----
-
-## Course Resources
-
-Faculty can upload resources for the course.
-
-Resource format:
-* Title
-* Link (Drive, GitHub, documentation etc.)
-
-Students can only view resources if they are **enrolled in the course**.
-
-
----
-
-## Course Announcements
-
-Faculty can post announcements related to the course.
-
-Students can view announcements but **cannot create them**.
----
-
-# Internship & Opportunity Portal
-
-The platform includes a **centralized opportunity board**.
-
-Faculty/Admin can:
-* Post internship or research opportunities
-* Set deadlines
-* View applicants
-
-Students can:
-* Browse opportunities
-* Apply for opportunities
-* Track applied opportunities in **My Opportunities**
-
-Each opportunity can be applied **only once per student**.
 ---
 
 # Grievance Management System
 
-Students can submit grievances through the system.
+## Students
 
-Features include:
+* Submit grievances
+* Track grievance status
 
-* Complaint submission
-* Status tracking
-* Administrative review
-* Transparent resolution workflow
+## Authority/Admin
 
-Authorities can update grievance status and manage reports.
+* View grievances
+* Update grievance status
+* Mark as:
+
+  * Pending
+  * In Progress
+  * Resolved
 
 ---
 
-# Announcement Board
+# Internship & Opportunity Portal
 
-Campus-wide announcements can be posted by faculty or administrators.
-Students can view announcements through their dashboard.
+## Faculty/Admin
+
+* Post opportunities
+* View applicants
+* Manage application status
+
+## Students
+
+* Apply for opportunities
+* Track applications
+* Prevent duplicate applications
+
+---
+
+# Announcement System
+
+* Global announcements
+* Course-specific announcements
+* Notification badge system
+* Faculty/Admin posting system
 
 ---
 
 # Analytics Dashboard
 
-Faculty and administrators can view analytics such as:
-
-* Total number of courses
-* Total student enrollments
+* Total users
+* Total courses
+* Total grievances
+* Total opportunities
+* Enrollment analytics
 * Most popular course
-* Average course enrollment
 
-This provides insight into **academic engagement across the campus**.
+---
+
+# Frontend Highlights
+
+* Modern glassmorphism UI
+* Responsive design
+* Dashboard layout
+* Gradient UI system
+* Card animations
+* Toast notifications
+* Dynamic role-based navigation
 
 ---
 
@@ -173,161 +130,155 @@ This provides insight into **academic engagement across the campus**.
 ## Frontend
 
 * React.js
+* React Router DOM
+* Axios
 * Tailwind CSS
-* React Router
+* React Hot Toast
 
 ## Backend
 
 * Node.js
 * Express.js
-
-## Database
-
 * MongoDB
 * Mongoose
-
-## Authentication
-
-* JWT-based authentication
-* Role-based access control
+* JWT Authentication
+* Multer
+* bcryptjs
 
 ---
 
 # Project Structure
 
-```
-AEGIS-Protocol
+```bash
+AEGIS-PROTOCOL/
 │
-├── client/               # React frontend
+├── client/
 │   ├── src/
-│   │   ├── pages/
-│   │   │   ├── Courses.js
-│   │   │   ├── MyCourses.js
-│   │   │   ├── CourseDetails.js
-│   │   │   ├── Opportunities.js
-│   │   │   ├── MyOpportunities.js
-│   │   │   └── Dashboard.js
-│   │   │
 │   │   ├── components/
-│   │   │   └── Sidebar.js
-│   │   │
-│   │   └── services/
-│   │       └── api.js
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── utils/
+│   │   └── App.js
 │
-├── server/               # Node.js backend
+├── server/
+│   ├── middleware/
 │   ├── models/
-│   │   ├── User.js
-│   │   ├── Course.js
-│   │   ├── Grievance.js
-│   │   └── Opportunity.js
-│   │
 │   ├── routes/
-│   │   ├── authRoutes.js
-│   │   ├── courseRoutes.js
-│   │   ├── grievanceRoutes.js
-│   │   └── opportunityRoutes.js
-│   │
+│   ├── uploads/
+│   ├── controllers/
+│   ├── utils/
 │   └── index.js
+│
+└── README.md
+```
+
+
+---
+
+# Installation Guide
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/your-username/aegis-protocol.git
 ```
 
 ---
 
-# How to Run the Project
+# 2️⃣ Install Frontend Dependencies
 
-## 1. Clone the Repository
-
-```
-git clone https://github.com/yourusername/aegis-protocol.git
-cd aegis-protocol
-```
-
----
-
-## 2. Install Backend Dependencies
-
-```
-cd server
+```bash
+cd client
 npm install
 ```
 
-Create a `.env` file in the server folder:
+---
 
+# 3️⃣ Install Backend Dependencies
+
+```bash
+cd ../server
+npm install
 ```
-MONGO_URI=your_mongodb_connection
-JWT_SECRET=your_secret_key
+
+---
+
+# 4️⃣ Configure Environment Variables
+
+Create `.env` inside `server/`
+
+```env
 PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+CLIENT_URL=http://localhost:3000
+NODE_ENV=development
 ```
 
-Run backend:
+---
 
-```
+# 5️⃣ Start Backend
+
+```bash
+cd server
 npm run dev
 ```
 
 ---
 
-## 3. Install Frontend Dependencies
+# 6️⃣ Start Frontend
 
-Open a new terminal:
-
-```
+```bash
 cd client
-npm install
 npm start
 ```
 
-Frontend runs on:
+---
 
-```
-http://localhost:3000
-```
+# 🌐 API Base URL
 
-Backend runs on:
-
-```
-http://localhost:5000
+```bash
+http://localhost:5000/api/v1
 ```
 
 ---
 
-# System Architecture
+# Major Backend Concepts Implemented
 
-The system follows a **MERN architecture**:
-
-React Frontend
-↓
-Express API
-↓
-MongoDB Database
-
-All protected routes use **JWT authentication** and role-based middleware.
-
----
-
-# Future Improvements
-
-The following features are planned for future versions:
-
-* Real-time notifications
-* Discussion forums for courses
-* Ride-sharing module
-* Lost & found system
-* Club management tools
-* AI-based grievance categorization
-* Real-time analytics dashboard
-* Notification system for course announcements
+* JWT Authentication
+* Middleware-based authorization
+* Ownership validation
+* File uploads using Multer
+* REST API architecture
+* MongoDB schema relationships
+* Population & referencing
+* Request validation
+* Protected routes
+* Role-based route protection
+* Assignment file handling
 
 ---
 
-# Conclusion
+# Major Frontend Concepts Implemented
 
-AEGIS Protocol demonstrates how a **unified digital ecosystem** can simplify campus operations by bringing together:
-
-* Academics
-* Opportunities
-* Governance
-* Communication
-
-The platform aims to improve **student engagement, transparency, and accessibility** across campus systems.
+* Dynamic dashboard routing
+* Protected frontend routes
+* Role-aware rendering
+* Responsive UI design
+* API integration using Axios
+* State management using hooks
+* Toast notifications
+* Modern dashboard UI
 
 ---
+
+# Real-World Engineering Concepts Used
+
+* RBAC (Role-Based Access Control)
+* Ownership Authorization
+* Multi-tenant Architecture
+* Secure Authentication
+* RESTful API Design
+* LMS-style Academic Management
+* Campus Governance Workflow
+
